@@ -118,14 +118,15 @@ def train_model(X, y, model_path="drone_ml_model.pkl"):
     y_val_scaled = scaler_y.transform(y_val)
     
     # Define Neural Network (MLP Regressor)
-    # 2 hidden layers with 128 and 64 neurons, ReLU activation, Adam optimizer
     model = MLPRegressor(
         hidden_layer_sizes=(256, 256, 128),  # Bigger capacity
         activation='relu',
         solver='adam',
-        max_iter=500,                         # Allow more iterations
+        max_iter=1000,                        # Allow more iterations
         batch_size=512,
         learning_rate_init=0.001,
+        tol=1e-6,                             # Tighter tolerance to prevent early stopping
+        n_iter_no_change=20,                  # Wait longer before giving up
         random_state=42,
         verbose=True
     )
