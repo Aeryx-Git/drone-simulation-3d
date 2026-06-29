@@ -59,10 +59,23 @@ Derives the total thrust magnitude $F_0$ and the target orientation angles ($\ph
 
 ### 3. Inner Loop Controller (Attitude Control)
 Computes corrective angular accelerations based on orientation errors:
-- $\text{error}_{\phi} = -\text{atan2}(\sin(\phi - \phi_d), \cos(\phi - \phi_d))$
-- $\text{error}_{\theta} = -\text{atan2}(\sin(\theta - \theta_d), \cos(\theta - \theta_d))$
-- $\alpha_{\phi, d} = S_P \cdot \text{error}_{\phi} - S_D \cdot \omega_{\phi} - k_{drag,rot} \cdot \omega_{\phi} \cdot |\omega_{\phi}|$
-- $\alpha_{\theta, d} = S_P \cdot \text{error}_{\theta} - S_D \cdot \omega_{\theta} - k_{drag,rot} \cdot \omega_{\theta} \cdot |\omega_{\theta}|$
+
+$$
+\text{error}_{\phi} = -\text{atan2}\big(\sin(\phi - \phi_d), \cos(\phi - \phi_d)\big)
+$$
+
+$$
+\text{error}_{\theta} = -\text{atan2}\big(\sin(\theta - \theta_d), \cos(\theta - \theta_d)\big)
+$$
+
+$$
+\alpha_{\phi, d} = S_P \cdot \text{error}_{\phi} - S_D \cdot \omega_{\phi} - k_{\text{drag,rot}} \cdot \omega_{\phi} \cdot |\omega_{\phi}|
+$$
+
+$$
+\alpha_{\theta, d} = S_P \cdot \text{error}_{\theta} - S_D \cdot \omega_{\theta} - k_{\text{drag,rot}} \cdot \omega_{\theta} \cdot |\omega_{\theta}|
+$$
+
 
 ### 4. Actuator Mixer
 Translates the desired attitude corrections and total thrust force into individual propeller forces ($T_1, T_2, T_3, T_4$) and clips them:
